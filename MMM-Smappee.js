@@ -5,6 +5,28 @@
  * MIT Licensed.
  */
 Module.register('MMM-Smappee', {
+  defaults: {
+    animationSpeed: 1000,
+    api: {
+      auth: 'https://app1pub.smappee.net/dev/v1/oauth2/token',
+      endpoint: 'https://app1pub.smappee.net/dev/v1/servicelocation/',
+      key: ''
+      client: {
+        id: '',
+        secret: ''
+      }
+      user: {
+        id: '',
+        password: ''
+      }
+    },
+    location: {
+      id: '',
+      name: ''
+    },
+    language: config.language,
+    updateInterval: 60000
+  },
   // Load translations files
   getTranslations: function() {
     return {
@@ -18,32 +40,17 @@ Module.register('MMM-Smappee', {
     var moduleInfo = document.createElement('div');
 
     if (!this.loaded) {
-      wrapper.innerHTML = this.config.loadingText;
+      wrapper.innerHTML = this.translate('LOADING');
       return wrapper;
     }
 
     var consumptionInfo = document.createElement('span');
-    //consumptionInfo.innerHTML = this.consumption;
+    consumptionInfo.innerHTML = this.consumption;
     moduleInfo.appendChild(consumptionInfo);
 
     wrapper.appendChild(moduleInfo);
 
     return wrapper;
-  },
-  socketNotificationReceived: function(notification, payload) {
-    /*if (notification === 'CONSUMPTION_UPDATED') {
-      Log.info('received CONSUMPTION_UPDATED');
-      //this.consumption = payload.consumption;
-
-      this.loaded = true;
-      this.updateDom(1000);
-    }*/
-  },
-  defaults: {
-    api_key: '',
-    updateInterval: 300000,
-    loadingText: 'Loading consumption...',
-    language: config.language
   },
   start: function() {
     Log.info('Starting module: ' + this.name);
@@ -53,7 +60,20 @@ Module.register('MMM-Smappee', {
     this.update(this);
   },
   update: function(self) {
-    self.sendSocketNotification('TRAFFIC_URL', self.url);
-    setTimeout(self.updateCommute, self.config.interval, self);
+    var location = self.config.location;
+    self.sendSocketNotification('SMAPPEE_LOAD', {location: location, api: self.config.api});
+    setTimeout(self.update, self.config.updateInterval, self);
+  },
+  process: function(payload){
+    this.consumption = payload.consumption;
+		this.loaded = true;
+		this.updateDom(this.config.animationSpeed);
+  },
+  socketNotificationReceived: function(notification, payload) {
+    if (notification === 'SMAPPEE_DATA' && this.config.location === payload.location) {
+      Log.info('received SMAPPEE_DATA');
+
+      this.process(payload);
+    }
   }
 });
