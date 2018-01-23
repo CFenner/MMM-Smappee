@@ -1,0 +1,22 @@
+{
+  "name": "smappee",
+  "version": "0.0.1",
+  "description": "Module for the Magic Mirror displaying the energy consumption measured by Smappee Energy Monitor",
+  "main": "MMM-Smappee.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CFenner/MMM-Smappee.git"
+  },
+  "author": "Christopher Fenner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CFenner/MMM-Smappee/issues"
+  },
+  "homepage": "https://github.com/CFenner/MMM-Smappee#readme",
+  "dependencies": {
+    "auth": "0.0.9"
+  }
+}
