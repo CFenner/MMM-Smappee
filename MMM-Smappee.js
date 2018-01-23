@@ -10,15 +10,14 @@ Module.register('MMM-Smappee', {
     api: {
       auth: 'https://app1pub.smappee.net/dev/v1/oauth2/token',
       endpoint: 'https://app1pub.smappee.net/dev/v1/servicelocation/',
-      key: ''
-      client: {
-        id: '',
-        secret: ''
-      }
-      user: {
-        id: '',
-        password: ''
-      }
+    },
+    client: {
+      id: '',
+      secret: ''
+    },
+    user: {
+      id: '',
+      password: ''
     },
     location: {
       id: '',
@@ -61,7 +60,7 @@ Module.register('MMM-Smappee', {
   },
   update: function(self) {
     var location = self.config.location;
-    self.sendSocketNotification('SMAPPEE_LOAD', {location: location, api: self.config.api});
+    self.sendSocketNotification('SMAPPEE_LOAD', self.config);
     setTimeout(self.update, self.config.updateInterval, self);
   },
   process: function(payload){
@@ -70,7 +69,7 @@ Module.register('MMM-Smappee', {
 		this.updateDom(this.config.animationSpeed);
   },
   socketNotificationReceived: function(notification, payload) {
-    if (notification === 'SMAPPEE_DATA' && this.config.location === payload.location) {
+    if (notification === 'SMAPPEE_DATA') { //  && this.config.location === payload.location
       Log.info('received SMAPPEE_DATA');
 
       this.process(payload);

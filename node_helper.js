@@ -18,6 +18,7 @@ module.exports = NodeHelper.create({
     getLocations: function(){},
     getConsumption: function(){},
     socketNotificationReceived: function(notification, payload) {
+        console.log(notification, payload);
         switch(notification){
             case 'CONFIG':
                 if(this.started == false){
