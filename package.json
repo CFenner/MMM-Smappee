@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/CFenner/MMM-Smappee#readme",
   "dependencies": {
-    "auth": "0.0.9"
+    "simple-oauth2": "^1.5.0"
   }
 }
