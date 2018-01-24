@@ -34,32 +34,41 @@ module.exports = NodeHelper.create({
             case 'SMAPPEE_LOAD':
                 var self = this;
 
-                var auth = oauth2.create({
-                    client: {
-                        id: payload.client.id,
-                        secret: payload.client.secret
-                      },
-                      auth: {
-                        tokenHost: 'https://app1pub.smappee.net/dev/v1',
-                        tokenPath: '/oauth2/token'
-                      }
-                });
+                if(!this.auth){
+                    this.auth = oauth2.create({
+                        client: {
+                            id: payload.client.id,
+                            secret: payload.client.secret
+                        },
+                        auth: {
+                            tokenHost: 'https://app1pub.smappee.net',
+                            tokenPath: '/dev/v1/oauth2/token'
+                        }
+                    });
+                    console.log('auth created');
+                }
 
-                auth.ownerPassword.getToken({
+                this.auth.ownerPassword.getToken({
                     username: payload.user.id,
                     password: payload.user.password
                 }).then((result) => {
-                    const accessToken = oauth2.accessToken.create(result);
+                    console.log('token received', result);
+
+                    this.accessToken = this.auth.accessToken.create(result);
                     
+                    console.log('token created', this.accessToken);
+
                     request.get(
                         'https://app1pub.smappee.net/dev/v1/servicelocation/', 
-                        {'auth': {'bearer': accessToken.token}}
+                        {'auth': {'bearer': this.accessToken.token}}
                     ).on('response', function(response, body) {
                         console.log(response.statusCode)
                         console.log(response.headers['content-type'])
                         console.log(body);
                     })
                     return accessToken;
+                }).catch((error) => {
+                    console.log(error);
                 });
 
                 self.sendSocketNotification('SMAPPEE_DATA', {"consumption": 123});//JSON.parse(body));
