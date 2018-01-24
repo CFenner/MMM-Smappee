@@ -56,7 +56,7 @@ module.exports = NodeHelper.create({
                     console.log('token created', self.accessToken);
                     request.get(
                         'https://app1pub.smappee.net/dev/v1/servicelocation/', {
-                        'auth': {'bearer': self.accessToken.token},
+                        'auth': {'bearer': self.accessToken.token.access_token},
                         json: false
                     }).then((response) => {
                         console.log('Response: ' + response);
