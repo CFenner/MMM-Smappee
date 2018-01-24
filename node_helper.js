@@ -9,7 +9,7 @@
 
 const NodeHelper = require('node_helper');
 const oauth2 = require('simple-oauth2');
-const request = require('request');
+const request = require('request-promise');
 
 module.exports = NodeHelper.create({
     start: function () {
@@ -34,8 +34,8 @@ module.exports = NodeHelper.create({
             case 'SMAPPEE_LOAD':
                 var self = this;
 
-                if(!this.auth){
-                    this.auth = oauth2.create({
+                if(!self.auth){
+                    self.auth = oauth2.create({
                         client: {
                             id: payload.client.id,
                             secret: payload.client.secret
@@ -45,33 +45,29 @@ module.exports = NodeHelper.create({
                             tokenPath: '/dev/v1/oauth2/token'
                         }
                     });
-                    console.log('auth created');
+                    console.log('oauth2 initialized');
                 }
 
-                this.auth.ownerPassword.getToken({
+                self.auth.ownerPassword.getToken({
                     username: payload.user.id,
                     password: payload.user.password
                 }).then((result) => {
-                    console.log('token received', result);
-
-                    this.accessToken = this.auth.accessToken.create(result);
-                    
-                    console.log('token created', this.accessToken);
-
+                    self.accessToken = self.auth.accessToken.create(result);
+                    console.log('token created', self.accessToken);
                     request.get(
-                        'https://app1pub.smappee.net/dev/v1/servicelocation/', 
-                        {'auth': {'bearer': this.accessToken.token}}
-                    ).on('response', function(response, body) {
-                        console.log(response.statusCode)
-                        console.log(response.headers['content-type'])
-                        console.log(body);
-                    })
-                    return accessToken;
+                        'https://app1pub.smappee.net/dev/v1/servicelocation/', {
+                        'auth': {'bearer': self.accessToken.token},
+                        json: false
+                    }).then((response) => {
+                        console.log('Response: ' + response);
+                        self.sendSocketNotification('SMAPPEE_DATA', {"consumption": response});//JSON.parse(body));
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+                    return self.accessToken;
                 }).catch((error) => {
                     console.log(error);
                 });
-
-                self.sendSocketNotification('SMAPPEE_DATA', {"consumption": 123});//JSON.parse(body));
                 break;
             default:
         }
