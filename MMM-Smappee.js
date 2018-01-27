@@ -41,23 +41,17 @@ Module.register('MMM-Smappee', {
       wrapper.innerHTML = this.translate('LOADING');
       return wrapper;
     } else {
-      var moduleInfo = document.createElement('div');
-      var valueWrapper, value;
-      //var consumptionInfo = document.createElement('span');
-      //consumptionInfo.innerHTML = this.consumption;
-      //moduleInfo.appendChild(consumptionInfo);
+      var moduleInfo = document.createElement('div'), valueWrapper, value;
   
       valueWrapper = document.createElement('div');
       valueWrapper.setAttribute('class', 'small');
       valueWrapper.innerHTML = this.translate('CURRENT_CONSUMPTION') + '&nbsp;';
       value = document.createElement('span');
-      //value.innerHTML = this.consumption.consumption * 10 + ' W';
       value.setAttribute('class', 'wi weathericon wi-lightning bright');
       valueWrapper.appendChild(value);
       moduleInfo.appendChild(valueWrapper);
 
       valueWrapper = document.createElement('div');
-      //valueWrapper.innerHTML = this.translate('CURRENT_CONSUMPTION') + '&nbsp;';
       value = document.createElement('span');
       value.innerHTML = this.consumption.consumption * 10 + ' W';
       value.setAttribute('class', 'bright');
@@ -65,10 +59,17 @@ Module.register('MMM-Smappee', {
       moduleInfo.appendChild(valueWrapper);
   
       valueWrapper = document.createElement('div');
+      valueWrapper.setAttribute('class', 'small');
       valueWrapper.innerHTML = this.translate('PERMANENT_CONSUMPTION') + '&nbsp;';
       value = document.createElement('span');
+      value.setAttribute('class', 'wi weathericon wi-night-clear bright');
+      valueWrapper.appendChild(value);
+      moduleInfo.appendChild(valueWrapper);
+
+      valueWrapper = document.createElement('div');
+      value = document.createElement('span');
       value.innerHTML = this.consumption.alwaysOn + ' W';
-      value.setAttribute('class', 'wi weathericon wi-stars bright');
+      value.setAttribute('class', 'bright');
       valueWrapper.appendChild(value);
       moduleInfo.appendChild(valueWrapper);
   
