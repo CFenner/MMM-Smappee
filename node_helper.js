@@ -80,8 +80,7 @@ module.exports = NodeHelper.create({
                     console.log('Consumption: ' + JSON.stringify(response));
                     var consumption = response.consumptions.pop()
                     console.log('Response: ' + JSON.stringify(consumption));
-                    self.sendSocketNotification(
-                        'SMAPPEE_DATA', JSON.stringify(consumption));
+                    self.sendSocketNotification('SMAPPEE_DATA', consumption);
                 }).catch(console.log);
                 break;
             default:
