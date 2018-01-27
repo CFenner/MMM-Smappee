@@ -8,7 +8,6 @@ Module.register('MMM-Smappee', {
   defaults: {
     animationSpeed: 1000,
     api: {
-      auth: 'https://app1pub.smappee.net/dev/v1/oauth2/token',
       endpoint: 'https://app1pub.smappee.net/dev/v1/servicelocation/',
     },
     client: {
@@ -47,9 +46,31 @@ Module.register('MMM-Smappee', {
     consumptionInfo.innerHTML = this.consumption;
     moduleInfo.appendChild(consumptionInfo);
 
+    var e1 = document.createElement('span');
+    e1.innerHTML = this.consumption.consumption;
+    moduleInfo.appendChild(e1);
+
+    var e2i = document.createElement('span');
+    e2i.innerHTML = this.consumption.alwaysOn;
+    e2i.setAttribute('class', 'wi weathericon wi-stars');
+    moduleInfo.appendChild(e2i);
+
+    var e2 = document.createElement('span');
+    e2.innerHTML = this.consumption.alwaysOn;
+    moduleInfo.appendChild(e2);
+
     wrapper.appendChild(moduleInfo);
 
     return wrapper;
+
+    /*
+    <div class="large light">
+      <span class="wi weathericon wi-day-sunny"></span>
+      <span class="wi weathericon wi-stars"></span>
+      <span class="wi weathericon wi-lightning"></span>
+      <span class="bright"> 10kwh</span>
+    </div>
+    */
   },
   start: function() {
     Log.info('Starting module: ' + this.name);
@@ -64,7 +85,7 @@ Module.register('MMM-Smappee', {
     setTimeout(self.update, self.config.updateInterval, self);
   },
   process: function(payload){
-    this.consumption = payload.consumption;
+    this.consumption = payload;
 		this.loaded = true;
 		this.updateDom(this.config.animationSpeed);
   },
