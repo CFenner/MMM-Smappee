@@ -28,7 +28,8 @@ Module.register('MMM-Smappee', {
   // Load translations files
   getTranslations: function() {
     return {
-      en: "i18n/en.json"
+      en: "i18n/en.json",
+      de: "i18n/de.json"
     };
   },
   getScripts: function() {return [];},
