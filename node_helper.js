@@ -11,8 +11,9 @@ const NodeHelper = require('node_helper');
 const oauth2 = require('simple-oauth2');
 const request = require('request-promise');
 const HOST = 'https://app1pub.smappee.net';
-const SERVICE_PATH = '/dev/v1/oauth2/token';
-const AUTH_PATH = '/dev/v1/servicelocation/';
+const ENDPOINT = '/dev/v1';
+const AUTH_PATH = '/oauth2/token';
+const SERVICE_PATH = '/servicelocation';
 const CONSUMPTION_PATH = '/{serviceId}/consumption';
 
 module.exports = NodeHelper.create({
@@ -43,8 +44,8 @@ module.exports = NodeHelper.create({
                             secret: payload.client.secret
                         },
                         auth: {
-                            tokenHost: 'https://app1pub.smappee.net',
-                            tokenPath: '/dev/v1/oauth2/token'
+                            tokenHost: HOST,
+                            tokenPath: ENDPOINT + AUTH_PATH
                         }
                     });
                     console.log('oauth2 initialized');
@@ -57,27 +58,28 @@ module.exports = NodeHelper.create({
                     self.accessToken = self.auth.accessToken.create(result);
                     console.log('token created', self.accessToken);
                     return request.get(
-                        'https://app1pub.smappee.net/dev/v1/servicelocation/', {
+                        HOST + ENDPOINT + SERVICE_PATH, {
                         'auth': {'bearer': self.accessToken.token.access_token},
-                        json: false
+                        json: true
                     });
                 }).then((response) => {
-                    var location = JSON.parse(response).serviceLocations[0].serviceLocationId;
+                    var location = response.serviceLocations[0].serviceLocationId;
                     var to = new Date().getTime();
-                    var from = to - 900000;
                     return request.get(
-                        'https://app1pub.smappee.net/dev/v1/servicelocation/' + location + '/consumption', {
+                        HOST + ENDPOINT + SERVICE_PATH + '/' + location + '/consumption', {
                         'auth': {'bearer': self.accessToken.token.access_token},
-                        json: false,
+                        json: true,
                         qs: {
                             aggregation: 1,
-                            from: from,
+                            from: to - 900000,
                             to: to,
                         }
                     });
                 }).then((response) => {
                     console.log('Response: ' + response);
-                    self.sendSocketNotification('SMAPPEE_DATA', {"consumption": response});//JSON.parse(body));
+                    var consumption = response.consumptions.pop()
+                    self.sendSocketNotification(
+                        'SMAPPEE_DATA', JSON.stringify(consumption));
                 }).catch(console.log);
                 break;
             default:
