@@ -1,4 +1,4 @@
 {
-    "CONSUMPTION": "consumption",
-    "ALWAYS_ON": "always on"
+    "CURRENT_CONSUMPTION": "current consumption",
+    "PERMANENT_CONSUMPTION:": "permanent consumption"
 }
