@@ -47,11 +47,22 @@ Module.register('MMM-Smappee', {
       //consumptionInfo.innerHTML = this.consumption;
       //moduleInfo.appendChild(consumptionInfo);
   
+      div text spanspan div div value div
+
       valueWrapper = document.createElement('div');
+      valueWrapper.setAttribute('class', 'small');
       valueWrapper.innerHTML = this.translate('CURRENT_CONSUMPTION') + '&nbsp;';
       value = document.createElement('span');
-      value.innerHTML = this.consumption.consumption * 10 + ' W';
+      //value.innerHTML = this.consumption.consumption * 10 + ' W';
       value.setAttribute('class', 'wi weathericon wi-lightning bright');
+      valueWrapper.appendChild(value);
+      moduleInfo.appendChild(valueWrapper);
+
+      valueWrapper = document.createElement('div');
+      //valueWrapper.innerHTML = this.translate('CURRENT_CONSUMPTION') + '&nbsp;';
+      value = document.createElement('span');
+      value.innerHTML = this.consumption.consumption * 10 + ' W';
+      value.setAttribute('class', 'bright');
       valueWrapper.appendChild(value);
       moduleInfo.appendChild(valueWrapper);
   
