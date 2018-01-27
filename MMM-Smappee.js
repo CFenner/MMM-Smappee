@@ -50,7 +50,7 @@ Module.register('MMM-Smappee', {
       valueWrapper = document.createElement('div');
       valueWrapper.innerHTML = this.translate('CURRENT_CONSUMPTION') + '&nbsp;';
       value = document.createElement('span');
-      value.innerHTML = this.consumption.consumption;
+      value.innerHTML = this.consumption.consumption * 10;
       value.setAttribute('class', 'wi weathericon wi-lightning');
       valueWrapper.appendChild(value);
       moduleInfo.appendChild(valueWrapper);
