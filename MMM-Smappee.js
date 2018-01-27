@@ -47,8 +47,6 @@ Module.register('MMM-Smappee', {
       //consumptionInfo.innerHTML = this.consumption;
       //moduleInfo.appendChild(consumptionInfo);
   
-      div text spanspan div div value div
-
       valueWrapper = document.createElement('div');
       valueWrapper.setAttribute('class', 'small');
       valueWrapper.innerHTML = this.translate('CURRENT_CONSUMPTION') + '&nbsp;';
