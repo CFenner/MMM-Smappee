@@ -40,26 +40,23 @@ Module.register('MMM-Smappee', {
     if (!this.loaded) {
       wrapper.innerHTML = this.translate('LOADING');
       return wrapper;
+    } else {
+      //var consumptionInfo = document.createElement('span');
+      //consumptionInfo.innerHTML = this.consumption;
+      //moduleInfo.appendChild(consumptionInfo);
+  
+      var value1 = document.createElement('span');
+      value1.innerHTML = this.consumption.consumption;
+      value1.setAttribute('class', 'wi weathericon wi-lightning');
+      moduleInfo.appendChild(value1);
+  
+      var value2 = document.createElement('span');
+      value2.innerHTML = this.consumption.alwaysOn;
+      value2.setAttribute('class', 'wi weathericon wi-stars');
+      moduleInfo.appendChild(value2);
+  
+      wrapper.appendChild(moduleInfo);
     }
-
-    var consumptionInfo = document.createElement('span');
-    consumptionInfo.innerHTML = this.consumption;
-    moduleInfo.appendChild(consumptionInfo);
-
-    var e1 = document.createElement('span');
-    e1.innerHTML = this.consumption.consumption;
-    moduleInfo.appendChild(e1);
-
-    var e2i = document.createElement('span');
-    e2i.innerHTML = this.consumption.alwaysOn;
-    e2i.setAttribute('class', 'wi weathericon wi-stars');
-    moduleInfo.appendChild(e2i);
-
-    var e2 = document.createElement('span');
-    e2.innerHTML = this.consumption.alwaysOn;
-    moduleInfo.appendChild(e2);
-
-    wrapper.appendChild(moduleInfo);
 
     return wrapper;
 
