@@ -63,7 +63,7 @@ module.exports = NodeHelper.create({
                         json: true
                     });
                 }).then((response) => {
-                    console.log('Location: ' + JSON.stringify(response);
+                    console.log('Location: ' + JSON.stringify(response));
                     var location = response.serviceLocations[0].serviceLocationId;
                     var to = new Date().getTime();
                     return request.get(
