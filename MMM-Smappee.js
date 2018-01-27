@@ -50,16 +50,16 @@ Module.register('MMM-Smappee', {
       valueWrapper = document.createElement('div');
       valueWrapper.innerHTML = this.translate('CURRENT_CONSUMPTION') + '&nbsp;';
       value = document.createElement('span');
-      value.innerHTML = this.consumption.consumption * 10;
-      value.setAttribute('class', 'wi weathericon wi-lightning');
+      value.innerHTML = this.consumption.consumption * 10 + ' W';
+      value.setAttribute('class', 'wi weathericon wi-lightning bright');
       valueWrapper.appendChild(value);
       moduleInfo.appendChild(valueWrapper);
   
       valueWrapper = document.createElement('div');
       valueWrapper.innerHTML = this.translate('PERMANENT_CONSUMPTION') + '&nbsp;';
       value = document.createElement('span');
-      value.innerHTML = this.consumption.alwaysOn;
-      value.setAttribute('class', 'wi weathericon wi-stars');
+      value.innerHTML = this.consumption.alwaysOn + ' W';
+      value.setAttribute('class', 'wi weathericon wi-stars bright');
       valueWrapper.appendChild(value);
       moduleInfo.appendChild(valueWrapper);
   
