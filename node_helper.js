@@ -63,6 +63,7 @@ module.exports = NodeHelper.create({
                         json: true
                     });
                 }).then((response) => {
+                    console.log('Location: ' + JSON.stringify(response);
                     var location = response.serviceLocations[0].serviceLocationId;
                     var to = new Date().getTime();
                     return request.get(
@@ -76,8 +77,9 @@ module.exports = NodeHelper.create({
                         }
                     });
                 }).then((response) => {
-                    console.log('Response: ' + response);
+                    console.log('Consumption: ' + JSON.stringify(response));
                     var consumption = response.consumptions.pop()
+                    console.log('Response: ' + JSON.stringify(consumption));
                     self.sendSocketNotification(
                         'SMAPPEE_DATA', JSON.stringify(consumption));
                 }).catch(console.log);
