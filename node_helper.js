@@ -63,15 +63,16 @@ module.exports = NodeHelper.create({
                     });
                 }).then((response) => {
                     var location = JSON.parse(response).serviceLocations[0].serviceLocationId;
-
+                    var to = new Date().getTime();
+                    var from = to - 900000;
                     return request.get(
                         'https://app1pub.smappee.net/dev/v1/servicelocation/' + location + '/consumption', {
                         'auth': {'bearer': self.accessToken.token.access_token},
                         json: false,
                         qs: {
                             aggregation: 1,
-                            from: new Date().getTime(),
-                            to: new Date().getTime() - 900000,
+                            from: from,
+                            to: to,
                         }
                     });
                 }).then((response) => {
