@@ -35,25 +35,32 @@ Module.register('MMM-Smappee', {
   getStyles: function() {return [];},
   getDom: function() {
     var wrapper = document.createElement("div");
-    var moduleInfo = document.createElement('div');
 
     if (!this.loaded) {
       wrapper.innerHTML = this.translate('LOADING');
       return wrapper;
     } else {
+      var moduleInfo = document.createElement('div');
+      var valueWrapper, value;
       //var consumptionInfo = document.createElement('span');
       //consumptionInfo.innerHTML = this.consumption;
       //moduleInfo.appendChild(consumptionInfo);
   
-      var value1 = document.createElement('span');
-      value1.innerHTML = this.consumption.consumption;
-      value1.setAttribute('class', 'wi weathericon wi-lightning');
-      moduleInfo.appendChild(value1);
+      valueWrapper = document.createElement('div');
+      valueWrapper.innerHTML = this.getTranslations(CURRENT_CONSUMPTION);
+      value = document.createElement('span');
+      value.innerHTML = this.consumption.consumption;
+      value.setAttribute('class', 'wi weathericon wi-lightning');
+      valueWrapper.appendChild(value);
+      moduleInfo.appendChild(valueWrapper);
   
-      var value2 = document.createElement('span');
-      value2.innerHTML = this.consumption.alwaysOn;
-      value2.setAttribute('class', 'wi weathericon wi-stars');
-      moduleInfo.appendChild(value2);
+      valueWrapper = document.createElement('div');
+      valueWrapper.innerHTML = this.getTranslations(PERMANENT_CONSUMPTION);
+      value = document.createElement('span');
+      value.innerHTML = this.consumption.alwaysOn;
+      value.setAttribute('class', 'wi weathericon wi-stars');
+      valueWrapper.appendChild(value);
+      moduleInfo.appendChild(valueWrapper);
   
       wrapper.appendChild(moduleInfo);
     }
