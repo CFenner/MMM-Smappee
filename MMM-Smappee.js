@@ -48,7 +48,7 @@ Module.register('MMM-Smappee', {
       //moduleInfo.appendChild(consumptionInfo);
   
       valueWrapper = document.createElement('div');
-      valueWrapper.innerHTML = this.getTranslations('CURRENT_CONSUMPTION');
+      valueWrapper.innerHTML = this.translate('CURRENT_CONSUMPTION');
       value = document.createElement('span');
       value.innerHTML = this.consumption.consumption;
       value.setAttribute('class', 'wi weathericon wi-lightning');
@@ -56,7 +56,7 @@ Module.register('MMM-Smappee', {
       moduleInfo.appendChild(valueWrapper);
   
       valueWrapper = document.createElement('div');
-      valueWrapper.innerHTML = this.getTranslations('PERMANENT_CONSUMPTION');
+      valueWrapper.innerHTML = this.translate('PERMANENT_CONSUMPTION');
       value = document.createElement('span');
       value.innerHTML = this.consumption.alwaysOn;
       value.setAttribute('class', 'wi weathericon wi-stars');
