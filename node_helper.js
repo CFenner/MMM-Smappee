@@ -10,6 +10,10 @@
 const NodeHelper = require('node_helper');
 const oauth2 = require('simple-oauth2');
 const request = require('request-promise');
+const HOST = 'https://app1pub.smappee.net';
+const SERVICE_PATH = '/dev/v1/oauth2/token';
+const AUTH_PATH = '/dev/v1/servicelocation/';
+const CONSUMPTION_PATH = '/{serviceId}/consumption';
 
 module.exports = NodeHelper.create({
     start: function () {
@@ -18,9 +22,7 @@ module.exports = NodeHelper.create({
     },
     getLocations: function(){},
     getConsumption: function(){},
-    getToken: function(){
-
-    },
+    getToken: function(){},
     socketNotificationReceived: function(notification, payload) {
         console.log(notification, payload);
         switch(notification){
@@ -54,20 +56,28 @@ module.exports = NodeHelper.create({
                 }).then((result) => {
                     self.accessToken = self.auth.accessToken.create(result);
                     console.log('token created', self.accessToken);
-                    request.get(
+                    return request.get(
                         'https://app1pub.smappee.net/dev/v1/servicelocation/', {
                         'auth': {'bearer': self.accessToken.token.access_token},
                         json: false
-                    }).then((response) => {
-                        console.log('Response: ' + response);
-                        self.sendSocketNotification('SMAPPEE_DATA', {"consumption": response});//JSON.parse(body));
-                    }).catch((error) => {
-                        console.log(error);
                     });
-                    return self.accessToken;
-                }).catch((error) => {
-                    console.log(error);
-                });
+                }).then((response) => {
+                    var location = JSON.parse(response).serviceLocations[0].serviceLocationId;
+
+                    return request.get(
+                        'https://app1pub.smappee.net/dev/v1/servicelocation/' + location + '/consumption', {
+                        'auth': {'bearer': self.accessToken.token.access_token},
+                        json: false,
+                        qs: {
+                            aggregation: 1,
+                            from: new Date().getTime(),
+                            to: new Date().getTime() - 900000,
+                        }
+                    });
+                }).then((response) => {
+                    console.log('Response: ' + response);
+                    self.sendSocketNotification('SMAPPEE_DATA', {"consumption": response});//JSON.parse(body));
+                }).catch(console.log);
                 break;
             default:
         }
