@@ -12,7 +12,7 @@ A module for the MagicMirror, to display informations about the currently energy
 _Prerequisites_
 
 - a Smappee Energy Monitor at home
-- an API key for Smappee API (request via email to support@smappee.com)
+- an API key for Smappees API
 
 ### API Access
 
