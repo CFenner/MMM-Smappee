@@ -11,14 +11,13 @@ A module for the MagicMirror, to display informations about the currently energy
 
 _Prerequisites_
 
-- requires MagicMirror v2.0.0
 - a Smappee Energy Monitor at home
 - an API key for Smappee API (request via email to support@smappee.com)
 
 ### API Access
 
 To use this module, it is required to have access to Smappees API. 
-You can request access to the API by opening a [ticket](https://support.smappee.com) or by sending an [email](mailto:support@smappee.com) with the following information:
+You can request access to the API by opening a [ticket](https://support.smappee.com/hc/de/requests/new) or by sending an [email](mailto:support@smappee.com) with the following information:
 - full name
 - account name
 - serial number
