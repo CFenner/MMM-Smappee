@@ -48,7 +48,7 @@ Module.register('MMM-Smappee', {
       valueWrapper.appendChild(value);
       if(this.config.showTimestamp){
         value = document.createElement('div');
-        value.innerHTML = moment(this.consumption.timestamp).locale(this.config.language).fromNow();
+        value.innerHTML = moment(this.consumption.timestamp).fromNow();
         valueWrapper.appendChild(value);
       }
       moduleInfo.appendChild(valueWrapper);
