@@ -62,9 +62,9 @@ module.exports = NodeHelper.create({
                 username: payload.user.id,
                 password: payload.user.password
             }).then(
-                self.getLocations
+                self.getLocations.bind(self)
             ).then(
-                self.getConsumption
+                self.getConsumption.bind(self)
             ).then((response) => {
                 self.sendSocketNotification('SMAPPEE_DATA', response.consumptions.pop());
             }).catch(console.log);
