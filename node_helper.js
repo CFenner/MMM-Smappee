@@ -14,13 +14,12 @@ const HOST = 'https://app1pub.smappee.net';
 const ENDPOINT = '/dev/v1';
 const AUTH_PATH = '/oauth2/token';
 const SERVICE_PATH = '/servicelocation';
-const CONSUMPTION_PATH = '/{serviceId}/consumption';
+//const CONSUMPTION_PATH = '/{serviceId}/consumption';
 
 module.exports = NodeHelper.create({
     start: function () {
         console.log("Starting node helper for " + this.name);
     },
-    getToken: function(){},
     getLocations: function(token){
         this.accessToken = this.auth.accessToken.create(token);
         return request.get(
