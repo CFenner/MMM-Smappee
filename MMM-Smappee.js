@@ -7,9 +7,6 @@
 Module.register('MMM-Smappee', {
   defaults: {
     animationSpeed: 1000,
-    api: {
-      endpoint: 'https://app1pub.smappee.net/dev/v1/servicelocation/',
-    },
     client: {
       id: '',
       secret: ''
@@ -22,7 +19,7 @@ Module.register('MMM-Smappee', {
       id: '',
       name: ''
     },
-    language: config.language,
+    showTimestamp: false,
     updateInterval: 60000
   },
   // Load translations files
@@ -32,8 +29,8 @@ Module.register('MMM-Smappee', {
       de: "i18n/de.json"
     };
   },
-  getScripts: function() {return [];},
-  getStyles: function() {return [];},
+  //getScripts: function() {return [];},
+  //getStyles: function() {return [];},
   getDom: function() {
     var wrapper = document.createElement("div");
 
@@ -49,6 +46,11 @@ Module.register('MMM-Smappee', {
       value = document.createElement('span');
       value.setAttribute('class', 'wi weathericon wi-lightning bright');
       valueWrapper.appendChild(value);
+      if(this.config.showTimestamp){
+        value = document.createElement('div');
+        value.innerHTML = moment(this.consumption.timestamp).locale(this.config.language).fromNow();
+        valueWrapper.appendChild(value);
+      }
       moduleInfo.appendChild(valueWrapper);
 
       valueWrapper = document.createElement('div');
@@ -57,7 +59,7 @@ Module.register('MMM-Smappee', {
       value.setAttribute('class', 'bright');
       valueWrapper.appendChild(value);
       moduleInfo.appendChild(valueWrapper);
-  
+
       valueWrapper = document.createElement('div');
       valueWrapper.setAttribute('class', 'small');
       valueWrapper.innerHTML = this.translate('PERMANENT_CONSUMPTION') + '&nbsp;';
@@ -75,17 +77,7 @@ Module.register('MMM-Smappee', {
   
       wrapper.appendChild(moduleInfo);
     }
-
     return wrapper;
-
-    /*
-    <div class="large light">
-      <span class="wi weathericon wi-day-sunny"></span>
-      <span class="wi weathericon wi-stars"></span>
-      <span class="wi weathericon wi-lightning"></span>
-      <span class="bright"> 10kwh</span>
-    </div>
-    */
   },
   start: function() {
     Log.info('Starting module: ' + this.name);
