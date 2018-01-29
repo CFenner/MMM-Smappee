@@ -1,4 +1,5 @@
 [![api](https://img.shields.io/badge/api-Smappee-orange.svg)](https://smappee.atlassian.net/wiki/spaces/DEVAPI/overview)
+[![Known Vulnerabilities](https://snyk.io/test/github/cfenner/mmm-smappee/badge.svg?targetFile=package.json)](https://snyk.io/test/github/cfenner/mmm-smappee?targetFile=package.json)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d36710fbef288959cc75/maintainability)](https://codeclimate.com/github/CFenner/MMM-Smappee/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d36710fbef288959cc75/test_coverage)](https://codeclimate.com/github/CFenner/MMM-Smappee/test_coverage)
 
