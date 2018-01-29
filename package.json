@@ -1,5 +1,5 @@
 {
-  "name": "smappee",
+  "name": "mmm-smappee",
   "version": "0.0.1",
   "description": "Module for the Magic Mirror displaying the energy consumption measured by Smappee Energy Monitor",
   "main": "MMM-Smappee.js",
