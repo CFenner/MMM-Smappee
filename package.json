@@ -5,7 +5,7 @@
   "main": "MMM-Smappee.js",
   "scripts": {
     "test": "npm run check-dependencies",
-    "check-dependencies": "versioneye-update --apikey $VERSIONEYE_TOKEN --projectid 5a6f68850fb24f6396145083"
+    "check-dependencies": "versioneye-update --apikey $VERSIONEYE_API_KEY --projectid 5a6f68850fb24f6396145083"
   },
   "repository": {
     "type": "git",
