@@ -3,6 +3,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/d36710fbef288959cc75/maintainability)](https://codeclimate.com/github/CFenner/MMM-Smappee/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d36710fbef288959cc75/test_coverage)](https://codeclimate.com/github/CFenner/MMM-Smappee/test_coverage)
 [![Dependency Status](https://www.versioneye.com/user/projects/5a6f68850fb24f6396145083/badge.svg?style=square)](https://www.versioneye.com/user/projects/5a6f68850fb24f6396145083)
+[![Build Status](https://travis-ci.org/CFenner/MMM-Smappee.svg?branch=master)](https://travis-ci.org/CFenner/MMM-Smappee)
 
 # MMM-Smappee
 A module for the MagicMirror, to display informations about the currently energy consumption measured by a Smappee Energy Monitor.
