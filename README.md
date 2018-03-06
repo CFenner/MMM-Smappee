@@ -2,8 +2,10 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/cfenner/mmm-smappee/badge.svg?targetFile=package.json)](https://snyk.io/test/github/cfenner/mmm-smappee?targetFile=package.json)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d36710fbef288959cc75/maintainability)](https://codeclimate.com/github/CFenner/MMM-Smappee/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d36710fbef288959cc75/test_coverage)](https://codeclimate.com/github/CFenner/MMM-Smappee/test_coverage)
-[![Dependency Status](https://www.versioneye.com/user/projects/5a6f68850fb24f6396145083/badge.svg?style=square)](https://www.versioneye.com/user/projects/5a6f68850fb24f6396145083)
 [![Build Status](https://travis-ci.org/CFenner/MMM-Smappee.svg?branch=master)](https://travis-ci.org/CFenner/MMM-Smappee)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/CFenner/MMM-Smappee/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/CFenner/MMM-Smappee/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/CFenner/MMM-Smappee/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/CFenner/MMM-Smappee/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/CFenner/MMM-Smappee/badges/build.png?b=master)](https://scrutinizer-ci.com/g/CFenner/MMM-Smappee/build-status/master)
 
 # MMM-Smappee
 A module for the MagicMirror, to display informations about the currently energy consumption measured by a Smappee Energy Monitor.
