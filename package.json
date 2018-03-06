@@ -4,8 +4,7 @@
   "description": "Module for the Magic Mirror displaying the energy consumption measured by Smappee Energy Monitor",
   "main": "MMM-Smappee.js",
   "scripts": {
-    "test": "npm run check-dependencies && npm run check-vulnerabilities",
-    "check-dependencies": "versioneye-update --apikey $VERSIONEYE_API_KEY --projectid 5a6f68850fb24f6396145083",
+    "test": "npm run check-vulnerabilities",
     "check-vulnerabilities": "snyk test"
   },
   "repository": {
@@ -24,7 +23,6 @@
     "simple-oauth2": "^1.5.0"
   },
   "devDependencies": {
-    "snyk": "^1.69.5",
-    "versioneye-update": "^1.4.4"
+    "snyk": "^1.69.5"
   }
 }
